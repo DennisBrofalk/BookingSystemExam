@@ -21,7 +21,8 @@ public class BookingService(IBookingRepository repository)
             .Where(booking => !booking.IsCancelled)
             .ToList();*/
         return repository.GetAll()
-        .Where(booking => !booking.IsCancelled && booking.Date >= DateOnly.FromDateTime(DateTime.Now))
+        // .Where(booking => !booking.IsCancelled && booking.Date >= DateOnly.FromDateTime(DateTime.Now)) // This line filters out cancelled bookings and bookings with a date in the past
+        .Where(booking => !booking.IsCancelled)
         .OrderBy(booking => booking.Date)
         //.OrderBy(booking => booking.StartTime)
         .ThenBy(booking => booking.StartTime)
