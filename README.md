@@ -19,5 +19,4 @@ dotnet run --project src/BookingSystem
 dotnet test
 ```
 
-Read the separate assignment instructions before starting. The existing code
-is incomplete and contains intentional defects.
+All four features are implemented and the four known defects are fixed. See docs/DEBUGGING.md
