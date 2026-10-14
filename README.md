@@ -19,4 +19,4 @@ dotnet run --project src/BookingSystem
 dotnet test
 ```
 
-All four features are implemented and the four known defects are fixed. See docs/DEBUGGING.md
+All four features are implemented and the four known defects are fixed. See DEBUGGING.md
