@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/docs/">
+    <File Path="DEBUGGING.md" />
+  </Folder>
   <Project Path="src/BookingSystem/BookingSystem.csproj" />
   <Project Path="tests/BookingSystem.Tests/BookingSystem.Tests.csproj" />
 </Solution>
