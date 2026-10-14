@@ -15,16 +15,10 @@ public class BookingService(IBookingRepository repository)
 
     public IReadOnlyList<Booking> GetActiveBookings()
     {
-        // This method has not been completed.
 
-        /*var activeBookings = repository.GetAll()
-            .Where(booking => !booking.IsCancelled)
-            .ToList();*/
         return repository.GetAll()
-        // .Where(booking => !booking.IsCancelled && booking.Date >= DateOnly.FromDateTime(DateTime.Now)) // This line filters out cancelled bookings and bookings with a date in the past
         .Where(booking => !booking.IsCancelled)
         .OrderBy(booking => booking.Date)
-        //.OrderBy(booking => booking.StartTime)
         .ThenBy(booking => booking.StartTime)
             .ToList();
 
@@ -85,7 +79,7 @@ public class BookingService(IBookingRepository repository)
             return BookingResult.Failure("The selected room does not exist.");
         }
 
-        if (booking.StartTime >= booking.EndTime) // Changed from booking.StartTime == booking.EndTime to booking.StartTime >= booking.EndTime - tack intellisense sparade 5 sec på att inte skriva detta
+        if (booking.StartTime >= booking.EndTime)
         {
             return BookingResult.Failure("The start time must be earlier than the end time.");
         }
@@ -104,8 +98,6 @@ public class BookingService(IBookingRepository repository)
             !existing.IsCancelled &&
             existing.Date == booking.Date &&
             existing.RoomName.Equals(booking.RoomName, StringComparison.OrdinalIgnoreCase) &&
-            //booking.StartTime >= existing.StartTime &&
-           //booking.StartTime < existing.EndTime);
             booking.StartTime < existing.EndTime &&
             booking.EndTime > existing.StartTime);
 
