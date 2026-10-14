@@ -18,7 +18,7 @@ public class BookingConsole(BookingService service)
             switch (option)
             {
                 case "1":
-                    ShowBookings(service.GetActiveBookings());
+                    ShowBookings(service.GetActiveBookings(), "There are currently no bookings.");
                     break;
                 case "2":
                     SearchBookings();
@@ -55,7 +55,7 @@ public class BookingConsole(BookingService service)
     {
         Console.Write("Customer name: ");
         var searchTerm = Console.ReadLine() ?? string.Empty;
-        ShowBookings(service.Search(searchTerm));
+        ShowBookings(service.Search(searchTerm), "No results found.");
     }
 
     private void CreateBooking()
@@ -69,22 +69,14 @@ public class BookingConsole(BookingService service)
         var endTime = ReadTime("End time (HH:mm): ");
 
         Console.Write("Participants: ");
-        //var participants = int.Parse(Console.ReadLine() ?? string.Empty);
-        //var participants = int.TryParse(Console.ReadLine() ?? string.Empty);
 
         int participants;
-
 
         while (!int.TryParse(Console.ReadLine(), out participants) || participants <= 0)
         {
             Console.WriteLine("Enter a valid number of participants.");
-        Console.Write("Participants: ");
+            Console.Write("Participants: ");
         }
-        /*if (participants == )
-        {
-            Console.WriteLine("Enter a valid number of participants.");
-            return;
-        }*/
 
         var booking = new Booking
         {
@@ -113,11 +105,11 @@ public class BookingConsole(BookingService service)
         Console.WriteLine(service.Cancel(bookingId).Message);
     }
 
-    private static void ShowBookings(IReadOnlyList<Booking> bookings)
+    private static void ShowBookings(IReadOnlyList<Booking> bookings, string emptyMessage)
     {
         if (bookings.Count == 0)
         {
-            Console.WriteLine("No bookings were found.");
+            Console.WriteLine(emptyMessage);
             return;
         }
 
